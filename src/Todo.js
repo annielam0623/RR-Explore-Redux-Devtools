@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addTodo, removeOne, clearTodo } from './features/todoSlice'
 
@@ -7,7 +7,7 @@ function Todo() {
     const dispatch = useDispatch()
     const [input, setInput] = useState('')
 
-    const renderItems = items.map((item, index) => <li key={index} onClick={() => dispatch(removeOne(index))}>{item}</li>)
+    const renderItems = 
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -21,7 +21,14 @@ function Todo() {
                 <button type="submit">Submit</button>
             </form>
             <ul>
-                {renderItems}
+                {
+                  items.map((item, i) => {
+                    return <Fragment key={i}>
+                    <li>{item}</li>
+                    <botton onClick={() => dispatch(deleteTodo(i))}>Delete</botton>
+                    </Fragment> 
+                })
+            }
             </ul>
             <button onClick={() => dispatch(clearTodo())}>Clear</button>
         </div>
